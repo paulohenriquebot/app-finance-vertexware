@@ -2,6 +2,12 @@ import 'package:finance_vertexware/utils/app_colors.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
+class AppColors {
+  static const Color primaryBlue = Color(0xFF1A237E); // Azul escuro
+  static const Color white = Colors.white; // Branco
+  static const Color accentOrange = Color(0xFFF57C00); // Laranja
+}
+
 class TextFieldWidget extends StatefulWidget {
   final IconData icon;
   final String label;
@@ -39,58 +45,44 @@ class TextFieldWidget extends StatefulWidget {
 }
 
 class _TextFieldWidgetState extends State<TextFieldWidget> {
-  bool isObscure = false;
+  late bool isObscure;
 
   @override
   void initState() {
     super.initState();
-
     isObscure = widget.isSecret;
   }
 
   @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.only(bottom: 15),
-      child: TextFormField(
-        controller: widget.controller,
-        readOnly: widget.readOnly,
-        initialValue: widget.initialValue,
-        inputFormatters: widget.inputFormatters,
-        obscureText: isObscure,
-        validator: widget.validator,
-        onSaved: widget.onSaved,
-        onChanged: (value) {},
-        onTap: widget.onTap,
-        keyboardType: widget.textInputType,
-        maxLines: widget.maxLines,
-        decoration: InputDecoration(
-          prefixIcon: Icon(widget.icon, color: AppColors.primaryDark),
-          suffixIcon: widget.isSecret
-              ? IconButton(
-                  onPressed: () {
-                    setState(() {
-                      isObscure = !isObscure;
-                    });
-                  },
-                  icon: Icon(
-                      isObscure ? Icons.visibility : Icons.visibility_off,
-                      color: AppColors.primaryDark),
-                )
-              : null,
-          labelText: widget.label,
-          labelStyle: const TextStyle(color: AppColors.primaryDark),
-          isDense: true,
-          border: widget.border
-              ? OutlineInputBorder(borderRadius: BorderRadius.circular(18.0))
-              : null,
-          focusedBorder: widget.border
-              ? OutlineInputBorder(
-                  borderSide: const BorderSide(color: AppColors.primary),
-                  borderRadius: BorderRadius.circular(18.0),
-                )
-              : null,
-        ),
+    return TextFormField(
+      controller: widget.controller,
+      initialValue: widget.initialValue,
+      readOnly: widget.readOnly,
+      onTap: widget.onTap,
+      obscureText: isObscure,
+      keyboardType: widget.textInputType,
+      maxLines: widget.isSecret ? 1 : widget.maxLines,
+      validator: widget.validator,
+      onSaved: widget.onSaved,
+      inputFormatters: widget.inputFormatters,
+      decoration: InputDecoration(
+        prefixIcon: Icon(widget.icon, color: AppColors.primaryBlue),
+        labelText: widget.label,
+        border: widget.border ? OutlineInputBorder() : InputBorder.none,
+        suffixIcon: widget.isSecret
+            ? IconButton(
+                icon: Icon(
+                  isObscure ? Icons.visibility : Icons.visibility_off,
+                  color: AppColors.primaryBlue,
+                ),
+                onPressed: () {
+                  setState(() {
+                    isObscure = !isObscure;
+                  });
+                },
+              )
+            : null,
       ),
     );
   }

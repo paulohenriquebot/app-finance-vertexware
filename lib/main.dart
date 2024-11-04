@@ -7,11 +7,11 @@ import 'package:provider/provider.dart';
 import 'controllers/auth_controller.dart';
 
 void main() {
-  runApp(const MyApp());
+  runApp(const PersonalFinanceApp());
 }
 
-class MyApp extends StatelessWidget {
-  const MyApp({super.key});
+class PersonalFinanceApp extends StatelessWidget {
+  const PersonalFinanceApp({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -20,7 +20,19 @@ class MyApp extends StatelessWidget {
         ChangeNotifierProvider(create: (_) => AuthController()),
       ],
       child: MaterialApp(
-        title: 'Meu App',
+        debugShowCheckedModeBanner: false,
+        title: 'Personal Finance',
+        theme: ThemeData(
+          primaryColor: Color(0xFF1A237E),
+          colorScheme: ColorScheme.fromSwatch().copyWith(
+            primary: Color(0xFF1A237E),
+            secondary: Color(0xFFF57C00),
+          ),
+          textTheme: const TextTheme(
+            bodyLarge: TextStyle(color: Color(0xFF1A237E)),
+          ),
+          visualDensity: VisualDensity.adaptivePlatformDensity,
+        ),
         initialRoute: '/login',
         routes: {
           '/login': (context) => LoginPage(),

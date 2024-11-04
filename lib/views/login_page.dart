@@ -1,5 +1,3 @@
-// lib/views/login_page.dart
-
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import '../controllers/auth_controller.dart';
@@ -63,7 +61,7 @@ class _LoginPageState extends State<LoginPage> {
                 // Botão de login
                 ButtonWidget(
                   onPressed: _onLoginPressed(controller),
-                  child: const Text('Login'),
+                  child: const Text('Entrar'), // Texto alterado para "Entrar"
                 ),
               ],
             ),
